@@ -1,25 +1,24 @@
-a = open('jogos.txt')
-numeros = a.read().replace('\n', ' ').split()
+jogos = open('jogos.txt')
+numeros = jogos.read().replace('\n', ' ').split()
 
 acertos = [0, 0, 0, 0, 0, 0, 0]
 
 aposta = []
 
-n = str(input('Quantos números vc quer apostar? ')).strip()
+quantidade = str(input('Quantos números vc quer apostar? ')).strip()
 
-while not n.isnumeric() or int(n) not in range(6, 16):
-    n = str(input('\033[31mDigite uma quantidade válida: \033[m')).strip()
+while not quantidade.isnumeric() or int(quantidade) not in range(6, 16):
+    quantidade = str(input('\033[31mDigite uma quantidade válida: \033[m')).strip()
 
-for y in range(0, int(n)):
-    x = str(input(f'{y + 1}º número: ')).strip()
+for c in range(0, int(quantidade)):
+    num = str(input(f'{c + 1}º número: ')).strip()
 
-    while not x.isnumeric() or int(x) not in range(1, 61) or x in aposta:
-        x = str(input(f'\033[31mDigite um {y + 1}º número válido: \033[m')).strip()
-
-    aposta.append(x)
+    while not num.isnumeric() or int(num) not in range(1, 61) or num in aposta:
+        num = str(input(f'\033[31mDigite um {c + 1}º número válido: \033[m')).strip()
+    aposta.append(num)
 print()
 
-for c, v in enumerate(numeros):
+for c in range(len(numeros)):
     cont = 0
     if c % 6 == 0:
         jogo = numeros[c - 5:c + 1]
@@ -38,5 +37,6 @@ print(f'Em {(len(numeros) - 1) / 6:.0f} jogos, você conseguiria:')
 print('-'*32)
 
 nomes = ['Nenhum acerto', '1 acerto', '2 acertos', '3 acertos', 'Quadra', 'Quina', 'Sena']
+print('Você conseguiria ->')
 for c in range(0, 7):
     print(f'{nomes[c]}: {acertos[c]} vezes')
